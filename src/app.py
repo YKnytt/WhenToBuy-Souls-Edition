@@ -19,12 +19,9 @@ st.set_page_config(
 # =========================================================
 # Each game has:
 # - its own data file
-# - its own trained model (when the current model is useful)
+# - its own trained model
 # - its own visual theme
 # - its own flavor text
-#
-# ML is intentionally disabled for games whose current
-# model did not demonstrate useful predictive signal.
 
 GAMES = {
     "Elden Ring": {

@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.venv/
+venv/
+env/
+
+.vscode/
+.idea/
+
+.DS_Store
+
+*.log
+
+.streamlit/secrets.toml
+
+# Generated combined-model experiment files
+data/features/fromsoftware_combined.csv
+data/features/fromsoftware_train.csv
+data/features/fromsoftware_test.csv

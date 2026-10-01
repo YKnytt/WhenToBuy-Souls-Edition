@@ -1,0 +1,38 @@
+from pathlib import Path
+import pandas as pd
+
+# Project folders
+project_folder = Path(__file__).parent.parent
+features_file = project_folder / "data" / "features" / "elden_ring.csv"
+
+# Load the data
+df = pd.read_csv(features_file)
+
+# Convert Date back into a real date
+df["Date"] = pd.to_datetime(df["Date"])
+
+# Make sure data is chronological
+df = df.sort_values("Date").reset_index(drop=True)
+
+# Calculate the split point
+split_index = int(len(df) * 0.80)
+
+# Split the data chronologically
+train_df = df.iloc[:split_index].copy()
+test_df = df.iloc[split_index:].copy()
+
+print("=" * 60)
+print("ELDEN RING TRAIN / TEST SPLIT")
+print("=" * 60)
+
+print(f"Total rows: {len(df)}")
+print(f"Training rows: {len(train_df)}")
+print(f"Testing rows: {len(test_df)}")
+
+print()
+print("Training period:")
+print(f"{train_df['Date'].min().date()} → {train_df['Date'].max().date()}")
+
+print()
+print("Testing period:")
+print(f"{test_df['Date'].min().date()} → {test_df['Date'].max().date()}")

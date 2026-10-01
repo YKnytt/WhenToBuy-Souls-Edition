@@ -587,7 +587,12 @@ daily = build_live_features(daily)
 
 current = daily.iloc[-1]
 
-current_date = current["Date"]
+# Use today for the live analysis window, while keeping the actual
+# latest observed market data unchanged.
+latest_data_date = current["Date"]
+analysis_date = pd.Timestamp.now().normalize()
+
+current_date = analysis_date
 current_price = float(current["Price"])
 historical_low = float(current["historical_low"])
 average_price = float(current["avg_price_last_365_days"])
@@ -752,8 +757,8 @@ st.markdown(
 )
 
 st.caption(
-    f"Live analysis based on the latest available price data: "
-    f"{current_date.strftime('%B %d, %Y')}"
+    f"Analysis date: {current_date.strftime('%B %d, %Y')} "
+    f"• Latest available price data: {latest_data_date.strftime('%B %d, %Y')}"
 )
 
 
@@ -1226,7 +1231,7 @@ if config["ml_available"]:
                 The recent average price was
                 <b>${average_price:.2f}</b>.
 
-                Today's observed price is
+                The latest observed price is
                 <b>{abs(percent_vs_average):.1f}% {comparison}</b>
                 that average.
 

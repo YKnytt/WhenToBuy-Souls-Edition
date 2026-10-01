@@ -21,7 +21,6 @@ st.set_page_config(
 # - its own data file
 # - its own trained model
 # - its own visual theme
-# - its own flavor text
 
 GAMES = {
     "Elden Ring": {
